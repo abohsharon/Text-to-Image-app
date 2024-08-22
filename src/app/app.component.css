@@ -1,0 +1,19 @@
+button {
+    background-color: aqua;
+    border: blue 1px solid;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+}
+.active {
+    background-color: aquamarine;
+    border: yellow 1px solid;
+}
+.no-active {
+    background-color: bisque;
+    border: red 1px solid;
+}
+.j-fish{
+    background-color: azure;
+    border: pink 1px solid;
+}
