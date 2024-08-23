@@ -1,48 +1,105 @@
-<div class="app">
-    <div class="container mx-auto max-w-[80%] max-h-[60%]">
-        <div class="grid grid-cols-2 gap-2">
 
-               <!-- first column -->
-           <div class="col-span-1 ">
-                <form action="" class=" my-5 p-3 bg-rose-50 rounded">
-
-                    <!-- image selector -->
-                    <div class="form-group mb-5">
-                        <label for="">Select an Image</label>
-                        <input type="file" class="form-control" id="img" name="img" accept="image/*" (change)="preview($event)">
+<div class="w-[100%] h-[95vh] bg-slate-500">
+    <div class="sm:w-[70%] lg:w-[75%] h-[80%]  mx-auto px-2 py-1">
+       
+        <section class="flex justify-center gap-2">
+            
+             <div class="bg-white w-[50%] h-full m-1 p-4 rounded">
+               <form action="">
+                <!-- Select image row -->
+                    <div>
+                        <label for="img">Select an Image</label>
+                        <br>
+                        <input type="file" accept="image/*" id="img" name="img" class="my-1" (change)="preview($event)">
+                        <!-- (change)="preview($event) -->
                     </div>
-                        <!-- top text -->
-                    <div class="form-group mb-5">
+
+                    <!-- Top Text -->
+                     <div>
                         <label for="top-text">Top Text</label>
-                        <input type="text" class="form-control bg-gray-50 border block border-gray-300 rounded-lg focus:ring-blue-500 my-2 mx-1 w-full" name="topText"> 
-                    </div>
-                            <!-- bottom text -->
-                    <div class="form-group mb-5">
+                        <input type="text" name="top-text" id="top-text" [(ngModel)]='topText' (keyup)="drawText()" class="bg-gray-50 border border-gray-300 rounded-md hover:border-gray-400 focus:ring-blue-200 w-full my-2">
+                     </div>
+                     <!-- Bottom Text -->
+                    <div>
                         <label for="bottom-text">Bottom Text</label>
-                        <input type="text" class="form-control bg-gray-50 border block border-gray-300 rounded-lg focus:ring-blue-500 my-2 mx-1 w-full" name="bottomText">
+                        <input type="text" name="bottom-text" id="bottom-text" [(ngModel)]='bottomText' (keyup)="drawText()" class="bg-gray-50 border border-gray-300 rounded-md hover:border-gray-400 focus:ring-blue-200 w-full my-2">
                     </div>
 
-
-                  <div class="flex gap-1">
-                            <div class="w-1/2">
-                              <label for="text-color">Text Color</label>
-                              <color-chrome></color-chrome>
+                                    <!-- Color Wheel -->
+                    <section class="lg:flex sm:block justify-center gap-10">
+                       
+                            <div>
+                                <label for="text-color">Text Color</label>
+                                <color-chrome (onChangeComplete)="canvasTextColor($event)"></color-chrome>
                             </div>
-                            <div class="w-1/2">
+                            <div>
                                 <label for="text-color">Background Color</label>
-                              <color-chrome></color-chrome>
+                                <color-chrome (onChangeComplete)="canvasBackgroundColor($event)"></color-chrome>
                             </div>
+                    </section>
+
+                    <div>
+                        <button type="button" (click)="imageDownload()" class="w-full py-2 px-4 my-3 bg-gray-200 hover:bg-blue-400 outline-red-700 rounded-md  text-center font-semibold">Download</button>
+                    </div>
+               </form>
+             </div>
+
+             <div class="bg-purple-700 w-[50%] m-1">
+                <canvas #canva class="shadow bg-white w-full h-[100%]"></canvas>
                   </div>
-                  <button class="bg-gray-200 py-2 px-4 mt-3 hover:outline-sky-500 border w-full shadow rounded-lg text-center font-semibold"> Download </button>
-                </form>
-           </div>
+        </section>
+    </div>
 
-               <!-- second column -->
-           <div class="col-span-1">
-                <canvas #canva class="shadow my-5 items-center w-full h-[92%] bg-custom-canvas border-blue-800">
+</div>
 
-                </canvas>
-           </div>
-        </div>
+
+
+
+<!-- <div class="app">
+<div class="container mx-auto max-w-[80%] max-h-[60%]">
+    <div class="grid grid-cols-2 gap-2">
+
+         first column 
+       <div class="col-span-1 ">
+            <form action="" class=" my-5 p-3 bg-rose-50 rounded">
+
+                <!-- image selector
+                <div class="form-group mb-5">
+                    <label for="">Select an Image</label>
+                    <input type="file" class="form-control" id="img" name="img" accept="image/*" (change)="preview($event)">
+                </div>
+                    <!-- top text 
+                <div class="form-group mb-5">
+                    <label for="top-text">Top Text</label>
+                    <input type="text" class="form-control bg-gray-50 border block border-gray-300 rounded-lg focus:ring-blue-500 my-2 mx-1 w-full" name="topText"> 
+                </div>
+                        <!-- bottom text 
+                <div class="form-group mb-5">
+                    <label for="bottom-text">Bottom Text</label>
+                    <input type="text" class="form-control bg-gray-50 border block border-gray-300 rounded-lg focus:ring-blue-500 my-2 mx-1 w-full" name="bottomText">
+                </div>
+
+
+              <div class="flex gap-1">
+                        <div class="w-1/2">
+                          <label for="text-color">Text Color</label>
+                          <color-chrome></color-chrome>
+                        </div>
+                        <div class="w-1/2">
+                            <label for="text-color">Background Color</label>
+                          <color-chrome></color-chrome>
+                        </div>
+              </div>
+              <button class="bg-gray-200 py-2 px-4 mt-3 hover:outline-sky-500 border w-full shadow rounded-lg text-center font-semibold"> Download </button>
+            </form>
+       </div>
+
+           <!-- second column 
+       <div class="col-span-1">
+            <canvas #canva class="shadow my-5 items-center w h-[92%] bg-custom-canvas border-blue-800">
+
+            </canvas>
+       </div>
     </div>
 </div>
+</div> -->
